@@ -16,13 +16,13 @@ To get started with this project, follow these steps:
 1. Clone the repository to your local machine:
 
    ```
-   git clone https://github.com/your-username/fyle-internship-challenge.git
+   git clone https://github.com/venkatesh7975/gitRepos.git
    ```
 
 2. Navigate to the project directory:
 
    ```
-   cd fyle-internship-challenge
+   cd fyle-internship-challenge-23
    ```
 
 3. Install the dependencies:
@@ -41,7 +41,7 @@ To get started with this project, follow these steps:
 
 ## Components
 
-This project consists of the following components:
+This project consists of the following components:git remote add origin https://github.com/venkatesh7975/gitRepos.git
 
 - **App Component**: The root component of the application. It contains the main layout and logic for fetching user data and repositories.
 
