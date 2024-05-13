@@ -1,0 +1,70 @@
+/* Styles for the fixed header */
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: #f7fafc; /* Adjust background color as needed */
+  padding: 10px;
+}
+
+/* Styles for the input and button in the header */
+input[type="text"] {
+  border: 1px solid #cbd5e0; /* Adjust border color as needed */
+  padding: 5px;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #3490dc; /* Adjust background color as needed */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #2779bd; /* Adjust hover background color as needed */
+}
+
+/* Styles for the user card */
+.user-card {
+  margin-top: 100px; /* Adjust margin top to create space below the fixed header */
+  padding: 20px;
+  background-color: white; /* Adjust background color as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adjust box shadow as needed */
+  border-radius: 4px;
+}
+
+/* Styles for the loading text */
+.skeleton-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Styles for the pagination */
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+/* Styles for the pagination buttons */
+.pagination div {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f7fafc; /* Adjust background color as needed */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Styles for the active pagination button */
+.pagination .active {
+  font-weight: bold;
+  background-color: #3490dc; /* Adjust background color as needed */
+  color: white;
+}

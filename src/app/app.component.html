@@ -1,5 +1,73 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
-    Fyle Internship Challenge
+<div class="grid h-screen place-items-center bg-gray-100">
+  <div class="fixed top-0 left-0 right-0 bg-gray-100 z-50 mb-10">
+    <div class="flex items-center justify-center">
+      <h1 class="font-bold text-3xl mb-4 text-center m-5">
+        Fyle Internship Challenge GitRepos
+      </h1>
+    </div>
+    <div class="flex items-center justify-center mb-4">
+      <input type="text" placeholder="Enter Github username" [(ngModel)]="username" class="border p-2 rounded">
+      <button (click)="search()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">Search</button>
+    </div>
+    <div *ngIf="!validuser" class="text-red-500 mt-4 text-center">
+      <h1>User not found</h1>
+    </div>
   </div>
+  <div class="pt-24"></div> <!-- Adjust padding top to push content below the fixed header -->
+  
+  <!-- Rest of the content -->
+
+
+  <div *ngIf="user" class="mt-10 p-5">
+    <div class="flex items-center flex-wrap mt-10 p-5">
+      <img src="{{ user.avatar_url }}" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;" class="mr-4">
+      <div>
+        <div>Github Username: {{ user.login }}</div>
+        <div>Location: {{ user.location }}</div>
+        <div>Github URL: <a href="{{ user.html_url }}" target="_blank">{{ user.html_url }}</a></div>
+        <p>Total Repositories: {{ totalRepos }}</p>
+      </div>
+    </div>
+    <div *ngIf="loading" class="skeleton-loader text-center">
+      <div>
+        <h1>Loading.......</h1>
+      </div>
+    </div>
+    <div class="mt-4">
+      <select [(ngModel)]="pageSize" (change)="changePageSize($event)" class="p-2">
+        <option value="5">5 per page</option>
+        <option value="10">10 per page</option>
+        <option value="20">20 per page</option>
+        <option value="50">50 per page</option>
+        <option value="100">100 per page</option>
+      </select>
+    </div>
+    <div *ngIf="repositories.length > 0" class="mt-4 grid md:grid-cols-2 gap-4">
+      <div *ngFor="let repo of repositories" class="bg-white shadow-md p-4 my-2 rounded">
+        <div class="font-bold">{{ repo.name }}</div>
+        <div>{{ repo.description }}</div>
+        
+        <div> <a href="{{ repo.html_url }}" target="_blank">{{ repo.html_url }}</a></div>
+        <div class="mt-2">{{ repo.language }}</div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4 flex justify-center">
+      <div *ngIf="totalPages <= 9" class="flex">
+        <div *ngFor="let pageNumber of pageNumbers" (click)="setPage(pageNumber)" [class.active]="pageNumber === page" class="cursor-pointer mx-1"><button>{{ pageNumber }}</button></div>
+      </div>
+      <div *ngIf="totalPages > 1" class="flex">
+        <div (click)="prevPage()" class="cursor-pointer mx-1"><button>prev</button></div>
+        <ng-container *ngFor="let pageNumber of displayPageNumbers">
+          <div *ngIf="pageNumber !== '...'" (click)="setPage(pageNumber)" [class.active]="pageNumber === page" class="cursor-pointer mx-1"><button>{{ pageNumber }}</button></div>
+          <div *ngIf="pageNumber === '...'" class="mx-1">...</div>
+        </ng-container>
+        <div (click)="nextPage()" class="cursor-pointer mx-1"><button>Next</button></div>
+      </div>
+    </div>
+
+  
+  </div>
+ 
 </div>

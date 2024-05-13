@@ -1,27 +1,48 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent]
-  }));
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      imports: [FormsModule, HttpClientTestingModule]
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'fyle-frontend-challenge'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('fyle-frontend-challenge');
+  it('should set default values for properties', () => {
+    expect(component.loading).toBeFalse();
+    expect(component.user).toBeNull();
+    expect(component.repositories).toEqual([]);
+    expect(component.page).toEqual(1);
+    expect(component.pageSize).toEqual(10);
+    expect(component.totalRepos).toEqual(0);
+    expect(component.totalPages).toEqual(0);
+    expect(component.pageNumbers).toEqual([]);
+    expect(component.displayPageNumbers).toEqual([]);
+    expect(component.validuser).toBeTrue();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('fyle-frontend-challenge app is running!');
+  it('should call fetchUserAndRepos method when search is called', () => {
+    spyOn(component, 'fetchUserAndRepos');
+    component.search();
+    expect(component.fetchUserAndRepos).toHaveBeenCalled();
   });
+
+  // Add more specific tests based on your component's functionality
 });
+
